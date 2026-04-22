@@ -91,14 +91,22 @@ function publishMatters(matters) {
         publishedAt: serverTimestamp(),
         matters
     };
-    set(ref(db, 'publishedData'), payload);
+    set(ref(db, 'publishedData'), payload)
+        .catch((error) => {
+            console.error("Firebase Publish Error:", error);
+            uploadStatus.innerText = "Error: Database permission denied. Check Firebase Rules.";
+        });
 }
 
 function clearPublishedData() {
     const confirmed = confirm("Clear all published matters from display?");
     if (!confirmed) return;
 
-    set(ref(db, 'publishedData'), null);
+    set(ref(db, 'publishedData'), null)
+        .catch((error) => {
+            console.error("Firebase Clear Error:", error);
+            alert("Failed to clear data: Permission denied.");
+        });
     displayPages = [];
     currentPageIndex = 0;
     if (rotationTimer) {

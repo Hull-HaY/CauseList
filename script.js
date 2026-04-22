@@ -9,7 +9,6 @@ const firebaseConfig = {
     databaseURL: "https://causelist-98e7b-default-rtdb.firebaseio.com/",
     projectId: "causelist-98e7b",
     storageBucket: "causelist-98e7b.firebasestorage.app",
-    messagingSenderId: "610909892107",
     appId: "1:610909892107:web:119b5ccba217f1c070610e",
     measurementId: "G-540D56WGM2"
 };
@@ -253,18 +252,22 @@ clearDataBtn.addEventListener("click", () => {
     const confirmed = confirm("Clear all published matters from display?");
     if (!confirmed) return;
 
-    set(ref(db, 'publishedData'), null);
-    lastPayloadSignature = "";
-    displayPages = [];
-    if (rotationTimer) {
-        clearInterval(rotationTimer);
-        rotationTimer = null;
-    }
-    document.getElementById("scheduleBody").innerHTML = "";
-    showNoData("Oops! No matters loaded.");
-    updateTicker([]);
-    uploadStatus.innerText = "Published data cleared.";
+    set(ref(db, 'publishedData'), null).catch(err => {
+        console.error("Clear failed:", err);
+        alert("Database Error: Permission denied. Check Firebase Rules.");
+        lastPayloadSignature = "";
+        displayPages = [];
+        if (rotationTimer) {
+            clearInterval(rotationTimer);
+            rotationTimer = null;
+        }
+        document.getElementById("scheduleBody").innerHTML = "";
+        showNoData("Oops! No matters loaded.");
+        updateTicker([]);
+        uploadStatus.innerText = "Published data cleared.";
+    });
 });
+
 
 uploadInput.addEventListener("change", async (event) => {
     const files = Array.from(event.target.files || []);
@@ -309,7 +312,11 @@ function publishMatters(matters) {
         matters
     };
     lastPayloadSignature = JSON.stringify(payload);
-    set(ref(db, 'publishedData'), payload);
+    set(ref(db, 'publishedData'), payload).catch(err => {
+        console.error("Publish failed:", err);
+        const status = document.getElementById("uploadStatus");
+        status.innerText = "Error: Database permission denied. Check Firebase Rules.";
+    });
 }
 
 async function extractPdfText(file) {
@@ -441,3 +448,4 @@ function parseCauseListText(fullText) {
     }
     return allData;
 }
+

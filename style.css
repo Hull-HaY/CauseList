@@ -20,6 +20,8 @@ body {
     font-family: "Roboto", sans-serif;
     background: var(--bg-main);
     color: var(--text-primary);
+    /* TV Safe Zone: Prevents content from being cut off at the edges */
+    padding: 1.5vw;
     height: 100vh;
     overflow: hidden;
     display: flex;
@@ -246,9 +248,12 @@ tbody td {
 #tickerText {
     display: inline-block;
     padding-left: 100%;
-    animation: scroll-left 400s linear infinite;
+    /* Optimized for TV: 120s is usually a good balance for long lists */
+    animation: scroll-left 120s linear infinite;
     font-size: 1rem;
     color: #fff;
+    /* Hardware acceleration for smooth scrolling on low-power TV CPUs */
+    will-change: transform;
 }
 
 .ticker-item {
@@ -289,6 +294,7 @@ tbody td {
     from {
         transform: translateX(0);
     }
+
     to {
         transform: translateX(-100%);
     }
@@ -359,43 +365,44 @@ tbody td {
     .main-header {
         padding: 10px 15px;
     }
-    
+
     #judiciaryLogo {
         height: 60px !important;
     }
-    
+
     #tribunalTitle {
         font-size: 1.3rem;
     }
-    
+
     .date-subtitle {
         font-size: 0.9rem;
     }
-    
+
     .table-container {
         overflow: auto;
     }
-    
+
     table {
-        min-width: 650px; /* Forces horizontal scrolling on small screens */
+        min-width: 650px;
+        /* Forces horizontal scrolling on small screens */
     }
-    
+
     .modal-content {
         width: 95%;
         max-height: 90vh;
         overflow-y: auto;
     }
-    
+
     .ticker-label {
         padding: 0 10px;
         font-size: 0.8rem;
         letter-spacing: 1px;
     }
-    
+
     .upload-section {
         flex-wrap: wrap;
     }
-    
+
     #pdfUpload {
         max-width: 100%;
     }
@@ -407,29 +414,29 @@ tbody td {
         text-align: center;
         gap: 10px !important;
     }
-    
+
     #judiciaryLogo {
         height: 50px !important;
     }
-    
+
     #tribunalTitle {
         font-size: 1.1rem;
     }
-    
+
     .date-subtitle {
         font-size: 0.8rem;
     }
-    
+
     .admin-danger-btn {
         width: 100%;
         margin-top: 10px;
         text-align: center;
     }
-    
+
     .modal-header h2 {
         font-size: 1.2rem;
     }
-    
+
     .close-btn {
         font-size: 1.5rem;
     }
