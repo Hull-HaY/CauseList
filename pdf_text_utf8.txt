@@ -1,0 +1,220 @@
+27.731,9.234:  
+15.218,10.374: MILIMANI HIGH COURT
+21.497,10.374:  
+17.168,11.401: NAIROBI
+19.547,11.401:  
+16.681,12.436: CAUSE LIST
+20.027,12.436:  
+14.701,13.464: THURSDAY, 16 APRIL 2026
+22.014,13.464:  
+13.103,14.499: HON. DOREEN KIBET  COURT ROOM 1
+23.604,14.499:  
+14.776,15.526:                   
+17.596,15.526: https://t.ly/I9qXs                                                                                                           
+38.667,15.526:                                                                                                            
+55.388,15.526:  
+4.184,16.616:  
+4.184,17.891: 09:00 AM
+6.651,17.891:  
+4.184,18.926: MENTION
+6.779,18.926:  
+4.184,20.013: 1.    NAIROBI_RRC/783/2019Januarius Kanyanja Karumba   Vs  Njeri Kahugu And Sannex 
+4.184,20.846: Enterprises Auctioneers  And 2 Others
+14.851,20.846:  
+4.184,22.181: 2.    NAIROBI_RRC/711/2020Filomenah Mwikali   Vs  Veronica Njeri And Diana Pere  And 1 Others
+31.736,22.181:  
+4.184,23.508: 3.    NAIROBI_RRC/638/2020Tom Kariuki  Vs Boniface Mungai 
+21.872,23.508:  
+4.184,24.843: 4.    NAIROBI_RRC/639/2020Benson Mabiru   Vs  Mark & Jedy Management
+25.554,24.843:  
+4.184,26.178: 5.    NAIROBI_RRC/643/2020
+12.458,26.178:  
+4.184,27.506: 6.    NAIROBI_RRC/649/2020Peter Njoroge   Vs  Faith Kinya
+21.039,27.506:  
+4.184,28.842: 7.    NAIROBI_RRC/74/2020Julia Wanjiru Moustache   Vs  Anne Njeri Kariuki And Edwin Mwangi 
+4.184,29.674: Wairagu T/a Trade Wide Auctioneers  And 1 Others
+18.503,29.674:  
+4.184,31.009: 8.    NAIROBI_RRC/75/2020Alice Wendy Atieno Oyugi   Vs  Alex Mukundi And Elizabeth Wanjiku
+31.121,31.009:  
+4.184,32.337: 9.    NAIROBI_RRC/759/2020Michael Mutinda   Vs  John Kinuthia And First Close Enterprises Ltd
+31.226,32.337:  
+4.184,33.672: 10.  NAIROBI_RRC/77/2020Sabastian M. Katungati   Vs  Mwangi Kibicho And Bluehills Real Etates 
+4.184,34.504: Ltd
+5.054,34.504:  
+4.184,35.839: 11.  NAIROBI_RRC/783/2020Doris Ndalo Khaveko   Vs  John Nduati And Felix Thuranira
+28.894,35.839:  
+4.184,37.167: 12.  NAIROBI_RRC/787/2020Callypson Mutisya Mulwa   Vs  Michael Kiarie
+25.037,37.167:  
+4.184,38.502: 13.  NAIROBI_RRC/821/2020Duncan Muraguri Gichure   Vs  Margaret Muriithi And Brian Mwaura
+31.226,38.502:  
+4.184,39.837: 14.  NAIROBI_RRC/828/2020Simon Gatembu Mugaa   Vs  Thomas Wanyanya & Others
+28.684,39.837:  
+4.184,41.166: 15.  NAIROBI_RRC/83/2020Purity Nkirote Muthuri   Vs  Michael Jacks Odiyo
+25.449,41.166:  
+4.184,42.501: 16.  NAIROBI_RRC/847/2020Patrick Obote Mbiya   Vs  Gathumbi Associates Co. Ltd And Heron 
+4.184,43.334: Auctioneers
+7.484,43.334:  
+4.184,44.669: 17.  NAIROBI_RRC/848/2020Winfred Syombua   Vs  Christopher Munga
+24.339,44.669:  
+4.184,45.996: 18.  NAIROBI_RRC/849/2020Samuel Karanga   Vs  Jogrespa Agencies And Aggrey Mukwana
+30.319,45.996:  
+4.184,47.331: 19.  NAIROBI_RRC/867/2020Peter Muiru   Vs  Robinson Maina J. K. Muchendu And T/a Icon 
+4.184,48.163: Auctioneers
+7.484,48.163:  
+27.731,9.234:  
+4.184,10.434: 20.  NAIROBI_RRC/428/2020Susan Nyambura Irungu   Vs  Hudson Awori And Jephy Auctioneers
+31.324,10.434:  
+4.184,11.769: 21.  NAIROBI_RRC/484/2020Antony Ndungu T/a Trion Enterprises   Vs  Agnes Gathura
+28.571,11.769:  
+4.184,13.096: 22.  NAIROBI_RRC/531/2020Ummie Dalizu   Vs  Rufas Hunja
+21.384,13.096:  
+4.184,14.431: 23.  NAIROBI_RRC/532/2020Sammy Tibita Ouma   Vs  Peter Karoba And Skyplus Agencies
+29.831,14.431:  
+4.184,15.765999999999998: 24.  NAIROBI_RRC/540/2020Daniel Mwaura  Vs Joe Wanjoroge And David Maina Ng,anga 
+29.726,15.765999999999998:  
+4.184,17.096: 25.  NAIROBI_RRC/600/2020Harrison Murage Njiru   Vs  Jorho Two Thousand And One Investments
+32.224,17.096:  
+4.184,18.431: 26.  NAIROBI_RRC/601/2020Mwalimu Katunge   Vs  Pauline Wanja
+23.049,18.431:  
+4.184,19.766: 27.  NAIROBI_RRC/602/2020Velma Naliaka   Vs  Esther Wanjiru Njuguna And Kevin Muriithi Mariga
+31.984,19.766:  
+4.184,21.093: 28.  NAIROBI_RRC/603/2020Nancy Njeri Joseph   Vs  Anderson Mbugua
+24.579,21.093:  
+4.184,22.428: 29.  NAIROBI_RRC/604/2020Eric Omondi Odhiambo   Vs  Teresia Wairimu Wanyoike
+28.024,22.428:  
+4.184,23.763: 30.  NAIROBI_RRC/605/2020John Karanja   Vs  Esther Wanjiku
+21.939,23.763:  
+4.184,25.091: 31.  NAIROBI_RRC/606/2020Tom Amboso   Vs  Benjamin Kisu And Zinco Kenya Limited
+28.894,25.091:  
+4.184,26.426: 32.  NAIROBI_RRC/607/2020Meryleen Gatwiri Riungu   Vs  Emma Kimwele
+25.239,26.426:  
+4.184,27.761: 33.  NAIROBI_RRC/608/2020Sadiq Mohamed &19 Others
+20.342,27.761:  
+4.184,29.089: 34.  NAIROBI_RRC/609/2020Edith Ng'ang'a   Vs  Alfred Nthiwa And Chabrin Agencies
+28.196,29.089:  
+4.184,30.424: 35.  NAIROBI_RRC/610/2020Geoffrey Gichohi And Moses Gicheru Kiragu T/a Vaniah Property 
+4.184,31.256999999999998: Consultants   Vs  David Gikunju
+12.976,31.256999999999998:  
+4.184,32.592: 36.  NAIROBI_RRC/611/2020Lydia Wagikondi And Moses Gicheru Kiragu T/a Vaniah Property 
+4.184,33.424: Consultants   Vs  Joseph Njunguna
+13.951,33.424:  
+4.184,34.752: 37.  NAIROBI_RRC/612/2020John Waigwa Wachira   Vs  Benson K Karomo And Partland Properties
+32.156,34.752:  
+4.184,36.087: 38.  NAIROBI_RRC/613/2020Cathrnie Mwihaki Ndutha   Vs  John Gitogo
+24.407,36.087:  
+4.184,37.422: 39.  NAIROBI_RRC/614/2020Lawrence Ngige Mwiruri   Vs  Peter Kilonzo
+24.482,37.422:  
+4.184,38.749: 40.  NAIROBI_RRC/615/2020Raymond Ndungu And Jane Mugure   Vs  Joseph Ndungo And Edwin 
+4.184,39.582: Mugo
+5.744,39.582:  
+4.184,40.919: 41.  NAIROBI_RRC/617/2020David Wakoli Otieno   Vs  Edwin & Rochman Properties Ltd
+28.924,40.919:  
+4.184,42.254: 42.  NAIROBI_RRC/618/2020Angela Muthuki   Vs  Everlyn Kyengo
+22.734,42.254:  
+4.184,43.581: 43.  NAIROBI_RRC/619/2020Peter Kibuba Ngethe   Vs  David Kinga
+23.222,43.581:  
+4.184,44.916: 44.  NAIROBI_RRC/620/2020Christoper Moi   Vs  Susan Muchiri
+22.074,44.916:  
+4.184,46.251: 45.  NAIROBI_RRC/621/2020John Mwaniki   Vs  Nelius Wanjiru Maina And Monica Mukami
+29.584,46.251:  
+4.184,47.578: 46.  NAIROBI_RRC/623/2020Oyoo Peter Bob   Vs  Pause Shelter Limited
+24.617,47.578:  
+27.731,9.234:  
+4.184,10.434: 47.  NAIROBI_RRC/624/2020Joy Mbuya M'miriti And Grace Njeri T/a Assetflow Limited   Vs  Vincent 
+4.184,11.266: Lipesa
+6.029,11.266:  
+4.184,12.601: 48.  NAIROBI_RRC/625/2020Ezekiel Kasuku Ayieko   Vs  Julius Atsiaya
+24.197,12.601:  
+4.184,13.929: 49.  NAIROBI_RRC/626/2020Joyce K Mwania And Dr. William Okedi   Vs  Olive Joycare Realtors Ltd 
+4.184,14.761: And Ernest Ochalu
+9.434,14.761:  
+4.184,16.096: 50.  NAIROBI_RRC/627/2020Jean Paulflohimont   Vs  East African Namdhari Sangat
+27.784,16.096:  
+4.184,17.433: 51.  NAIROBI_RRC/628/2020Boniface Njiru And Frida Gakii   Vs  Polycarp Okombo And Hesands 
+4.184,18.266: 2011 Enerprises Ltd
+9.779,18.266:  
+4.184,19.593: 52.  NAIROBI_RRC/629/2020Margaret Omondi   Vs  Nusu Mwamanzi
+23.537,19.593:  
+4.184,20.928: 53.  NAIROBI_RRC/630/2020Catherine Nyawira Mungai   Vs  Peter Wanyoike Kimotho Elshaddai 
+4.184,21.761: Apartments
+7.379,21.761:  
+4.184,23.096: 54.  NAIROBI_RRC/79/2020Rose Wanjiku Kamangu   Vs  Winfred Mwongeli
+25.382,23.096:  
+4.184,24.423: 55.  NAIROBI_RRC/818/2020Kevin Okelo Okeyo   Vs  Paul Issabell And Kahen Agencies T/a 
+4.184,25.256: Sylvester Kamende
+9.606,25.256:  
+4.184,26.591: 56.  NAIROBI_RRC/840/2020Elizabeth Muthoni Murage   Vs  Marylebone Properties Ltd And Keysian 
+4.184,27.423: Auctioneers
+7.484,27.423:  
+4.184,28.759: 57.  NAIROBI_RRC/76/2020Isaac Mukongolo Tambusi   Vs  Hellen Wanjugu Wathibio T/a Realtech 
+4.184,29.592: Properties
+7.034,29.592:  
+4.184,30.919: 58.  NAIROBI_RRC/631/2020Ahmed Abdikarim   Vs  Estate Of Kimori Gachore And Masterways 
+4.184,31.752000000000002: Properties Ltd  And 1 Others
+12.113,31.752000000000002:  
+4.184,33.087: 59.  NAIROBI_RRC/632/2020Emmanuel Chakali   Vs  Catherine Wamboi Njoroge
+26.837,33.087:  
+27.731,9.234:  
+4.184,10.434:  
+15.218,11.709: MILIMANI HIGH COURT
+21.497,11.709:  
+17.168,12.736: NAIROBI
+19.547,12.736:  
+16.681,13.771: CAUSE LIST
+20.027,13.771:  
+14.701,14.799: THURSDAY, 16 APRIL 2026
+22.014,14.799:  
+7.604,15.826: MR. HILLARY  KORIR (CHAIRMAN), HON. ESTHER NGIMA NDIRANGU  COURT 1
+29.111,15.826:  
+15.526,16.863: https://bit.ly/3IQ7SB2                                                                                                       
+37.288,16.863:                                                                                                                              
+56.821,16.863:  
+4.184,17.951:  
+4.184,19.226: 09:00 AM
+6.651,19.226:  
+4.184,20.253: HEARING
+6.779,20.253:  
+4.184,21.348: 1.    RRC/E1097/2023       Moses Ochieng Arodi   Vs  Nancy Wangeci Marwa And David Nderitu  And 
+4.184,22.181: 1 Others
+6.584,22.181:  
+4.184,23.508: 2.    RRC/E1056/2024       Abdullahi Hani   Vs  Maansai Property Investments 
+25.764,23.508:  
+4.184,24.843: 3.    RRC/E1104/2025       Michael Onyango   Vs  Bazyl Omondi Ong'wen 
+24.662,24.843:  
+4.184,26.178: 4.    RRC/E1861/2025       Noelina Adagala   Vs  Ruth Owino And Impact Zone Agencies 
+28.819,26.178:  
+4.184,27.506: 5.    RRC/E1070/2025       Selman Lopez Muzama   Vs  Ijara Properties Ltd And James Carter Ambajo 
+32.644,27.506:  
+4.184,28.842: 6.    RRC/E2162/2025       Yusuf Abdalla Idarus   Vs  Shazia Abdul Majid 
+24.407,28.842:  
+4.184,30.177: 7.    RRC/E2293/2025       Enock Nyangwara   Vs  Monica Matega 
+22.629,30.177:  
+4.184,31.503999999999998: 8.    RRC/E2374/2025       Shady  Mangare   Vs  Dickason Ndiewo And George Ogombe 
+28.826,31.503999999999998:  
+4.184,32.839: 9.    RRC/E167/2026         Alex   Vs  Recho Chiera
+18.151,32.839:  
+4.184,34.174: 10.  RRC/E156/2026         Teresia Mwangi   Vs  Esther Nyakundi And Jackson Nyandiko 
+28.811,34.174:  
+4.184,35.502: 11.  RRC/E304/2026         Eliud Kipsugut     Vs  Grace Mayoyo
+21.519,35.502:  
+4.184,36.837: 12.  RRC/E227/2026         Nancy  Wambui   Vs  Fredrick Karia
+21.414,36.837:  
+4.184,38.172: 13.  RRC/E566/2026         Charles Okwemba Anangwe   Vs  Mercylyne Nyabiage Omwamba. 
+30.236,38.172:  
+4.184,39.499: 14.  RRC/E312/2026         Andrew Musila   Vs  Rohi Estate Management Limited
+26.454,39.499:  
+4.184,40.776: MENTION
+6.779,40.776:  
+4.184,41.864: 15.  RRC/E2118/2025       Denis Satia   Vs  Great Homes 
+20.199,41.864:  
+4.184,43.199: 16.  RRC/E1723/2025       Chrisantus And Mofeat Angwenyi   Vs  Jecinta Njambi 
+26.627,43.199:  
+4.184,44.534: 17.  RRC/E1635/2025       Alex Sang   Vs  George Mwangi Macheru And Alex Githinji
+27.739,44.534:  
+27.731,9.234:  
+4.184,10.434:  
+4.184,11.769:  
+4.184,13.096:  
+4.184,14.431:  
+27.731,9.234:  
+4.184,10.434:  

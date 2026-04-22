@@ -1,0 +1,295 @@
+:root {
+    --bg-main: #06140a;
+    --table-header-bg: #093318;
+    --row-even: #081f0e;
+    --row-odd: #06140a;
+    --border-color: #14592a;
+    --text-primary: #ffffff;
+    --text-secondary: #e5e5e5;
+    --accent: #cfa92d;
+    --accent-glow: rgba(207, 169, 45, 0.2);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    background: var(--bg-main);
+    color: var(--text-primary);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+.main-header {
+    padding: 10px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--accent);
+    background: linear-gradient(to right, #093318, #06140a);
+}
+
+#tribunalTitle {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+    color: var(--text-primary);
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+.date-subtitle {
+    color: var(--accent);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.upload-section {
+    padding: 8px 18px;
+    border-bottom: 1px solid var(--border-color);
+    background: #082111;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.upload-section.hidden-admin {
+    display: none;
+}
+
+.upload-section label {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+#pdfUpload {
+    background: var(--row-even);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 4px;
+}
+
+#uploadStatus {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.admin-danger-btn {
+    margin-left: auto;
+    background: #7f1d1d;
+    color: #ffffff;
+    border: 1px solid #ef4444;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.admin-danger-btn:hover {
+    background: #991b1b;
+}
+
+.table-container {
+    flex: 1;
+    overflow: hidden;
+    padding: 4px 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+thead th {
+    text-align: left;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px 10px;
+    font-weight: 700;
+    background: var(--table-header-bg);
+    border-bottom: 3px solid var(--accent);
+}
+
+tbody tr:nth-child(even) {
+    background: var(--row-even);
+}
+
+tbody tr:nth-child(odd) {
+    background: var(--row-odd);
+}
+
+tbody td {
+    padding: 8px 10px;
+    font-size: 0.88rem;
+    border-bottom: 1px solid var(--border-color);
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.case-no {
+    font-weight: 700;
+    color: #fff;
+    word-break: break-word;
+}
+
+.proceedings-text {
+    margin-top: 4px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: #cbd5e1;
+}
+
+.time-badge {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.officer-name {
+    color: #e2e8f0;
+}
+
+.matter-type {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+#noDataMessage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    color: var(--text-secondary);
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+#noDataMessage.hidden {
+    display: none;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-align: center;
+}
+
+.empty-state-icon {
+    width: 190px;
+    max-width: 55vw;
+    height: auto;
+}
+
+#ticker {
+    height: 44px;
+    background: #093318;
+    border-top: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.ticker-label {
+    background: #cfa92d;
+    color: #06140a;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+}
+
+.ticker-content-wrapper {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#tickerText {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scroll-left 400s linear infinite;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.ticker-item {
+    margin-right: 40px;
+}
+
+#scheduleTable th:nth-child(1),
+#scheduleTable td:nth-child(1) {
+    width: 13%;
+}
+
+#scheduleTable th:nth-child(2),
+#scheduleTable td:nth-child(2) {
+    width: 14%;
+}
+
+#scheduleTable th:nth-child(3),
+#scheduleTable td:nth-child(3) {
+    width: 17%;
+}
+
+#scheduleTable th:nth-child(4),
+#scheduleTable td:nth-child(4) {
+    width: 10%;
+}
+
+#scheduleTable th:nth-child(6),
+#scheduleTable td:nth-child(6) {
+    width: 10%;
+    white-space: nowrap;
+}
+
+.ticker-item strong {
+    color: var(--accent);
+}
+
+@keyframes scroll-left {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
