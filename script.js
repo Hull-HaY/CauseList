@@ -1,7 +1,17 @@
+import * as pdfjsLib from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs";
+pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs";
+
 const ROWS_PER_PAGE = 5;
 const ROTATION_INTERVAL_MS = 15000;
 const PUBLISHED_DATA_KEY = "causelist_published_data_v1";
 const DATA_REFRESH_INTERVAL_MS = 5000;
+const ADMIN_PASSCODE_SHA256 = "c2d33f0eaceab8076bb22fedc1c75ccfa616e9a055c9b176bdf88e781af9f71f";
+const ADMIN_TIMEOUT_MS = 3 * 60 * 1000; // 3 minutes
+
+let adminAuthenticated = false;
+let adminSessionTimer = null;
+let adminCountdownInterval = null;
+let adminTimeLeft = 0;
 
 let displayPages = [];
 let currentPageIndex = 0;
@@ -153,3 +163,285 @@ window.addEventListener("storage", (event) => {
 
 loadPublishedData();
 setInterval(loadPublishedData, DATA_REFRESH_INTERVAL_MS);
+
+// === ADMIN MODAL LOGIC ===
+
+const adminModal = document.getElementById("adminModal");
+const closeAdminBtn = document.getElementById("closeAdminBtn");
+const adminTimerDisplay = document.getElementById("adminTimerDisplay");
+const uploadInput = document.getElementById("pdfUpload");
+const uploadStatus = document.getElementById("uploadStatus");
+const clearDataBtn = document.getElementById("clearDataBtn");
+
+window.addEventListener("keydown", async (e) => {
+    // Ctrl+Shift+U
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "u") {
+        e.preventDefault();
+        await openAdminPanel();
+    }
+    // Ctrl+Shift+L
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "l") {
+        e.preventDefault();
+        lockAdminPanel();
+    }
+});
+
+async function sha256(value) {
+    const data = new TextEncoder().encode(value);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    return [...new Uint8Array(hashBuffer)].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function openAdminPanel() {
+    if (!adminAuthenticated) {
+        const pass = prompt("Admin passcode required:");
+        if (!pass) return;
+        const enteredHash = await sha256(pass);
+        if (enteredHash !== ADMIN_PASSCODE_SHA256) {
+            alert("Unauthorized.");
+            return;
+        }
+        adminAuthenticated = true;
+    }
+    
+    adminModal.classList.remove("hidden");
+    startAdminSessionTimer();
+}
+
+function lockAdminPanel() {
+    adminAuthenticated = false;
+    adminModal.classList.add("hidden");
+    clearAdminTimers();
+}
+
+function startAdminSessionTimer() {
+    clearAdminTimers();
+    adminTimeLeft = ADMIN_TIMEOUT_MS / 1000;
+    updateAdminTimerDisplay();
+
+    adminCountdownInterval = setInterval(() => {
+        adminTimeLeft--;
+        updateAdminTimerDisplay();
+    }, 1000);
+
+    adminSessionTimer = setTimeout(() => {
+        lockAdminPanel();
+    }, ADMIN_TIMEOUT_MS);
+}
+
+function clearAdminTimers() {
+    if (adminSessionTimer) clearTimeout(adminSessionTimer);
+    if (adminCountdownInterval) clearInterval(adminCountdownInterval);
+    adminSessionTimer = null;
+    adminCountdownInterval = null;
+}
+
+function updateAdminTimerDisplay() {
+    if (adminTimeLeft <= 0) {
+        adminTimerDisplay.innerText = "";
+        return;
+    }
+    const m = Math.floor(adminTimeLeft / 60);
+    const s = adminTimeLeft % 60;
+    adminTimerDisplay.innerText = `(Auto-lock in ${m}:${s.toString().padStart(2, "0")})`;
+}
+
+closeAdminBtn.addEventListener("click", () => {
+    adminModal.classList.add("hidden");
+});
+
+// Admin File Upload & Clear Logic
+clearDataBtn.addEventListener("click", () => {
+    const confirmed = confirm("Clear all published matters from display?");
+    if (!confirmed) return;
+
+    localStorage.removeItem(PUBLISHED_DATA_KEY);
+    lastPayloadSignature = "";
+    displayPages = [];
+    currentPageIndex = 0;
+    if (rotationTimer) {
+        clearInterval(rotationTimer);
+        rotationTimer = null;
+    }
+    document.getElementById("scheduleBody").innerHTML = "";
+    showNoData("Oops! No matters loaded.");
+    updateTicker([]);
+    uploadStatus.innerText = "Published data cleared.";
+});
+
+uploadInput.addEventListener("change", async (event) => {
+    const files = Array.from(event.target.files || []);
+    if (files.length === 0) return;
+
+    uploadStatus.innerText = `Reading ${files.length} PDF file(s)...`;
+    const mergedData = [];
+    const failedFiles = [];
+
+    for (let index = 0; index < files.length; index++) {
+        const file = files[index];
+        uploadStatus.innerText = `Parsing file ${index + 1}/${files.length}: ${file.name}`;
+        try {
+            const text = await extractPdfText(file);
+            mergedData.push(
+                ...parseCauseListText(text).map((item) => ({
+                    ...item,
+                    sourceFile: file.name
+                }))
+            );
+        } catch (error) {
+            console.error(`PDF parse failed (${file.name}):`, error);
+            failedFiles.push(file.name);
+        }
+    }
+
+    if (mergedData.length === 0) {
+        uploadStatus.innerText = `Parsed 0/${files.length}. Failed: ${failedFiles.length}`;
+        return;
+    }
+
+    publishMatters(mergedData);
+    processData(mergedData);
+
+    const parsedFiles = files.length - failedFiles.length;
+    uploadStatus.innerText = `Published ${mergedData.length} matters from ${parsedFiles}/${files.length} files${failedFiles.length ? ` | Failed: ${failedFiles.length}` : ""}`;
+});
+
+function publishMatters(matters) {
+    const payload = {
+        publishedAt: new Date().toISOString(),
+        matters
+    };
+    const raw = JSON.stringify(payload);
+    localStorage.setItem(PUBLISHED_DATA_KEY, raw);
+    lastPayloadSignature = raw;
+}
+
+async function extractPdfText(file) {
+    const buffer = await file.arrayBuffer();
+    const typedData = new Uint8Array(buffer);
+    let pdf;
+    try {
+        pdf = await pdfjsLib.getDocument({ data: typedData }).promise;
+    } catch (workerError) {
+        pdf = await pdfjsLib.getDocument({ data: typedData, disableWorker: true }).promise;
+    }
+    const pages = [];
+
+    for (let p = 1; p <= pdf.numPages; p++) {
+        const page = await pdf.getPage(p);
+        const content = await page.getTextContent();
+        const lines = rebuildLinesFromTextItems(content.items);
+        pages.push(lines.join("\n"));
+    }
+    return pages.join("\n");
+}
+
+function rebuildLinesFromTextItems(items) {
+    const byY = new Map();
+    items.forEach((item) => {
+        const y = Math.round(item.transform[5] * 10) / 10;
+        const x = item.transform[4];
+        if (!byY.has(y)) byY.set(y, []);
+        byY.get(y).push({ x, str: item.str });
+    });
+
+    return [...byY.entries()]
+        .sort((a, b) => b[0] - a[0])
+        .map(([, row]) => row.sort((a, b) => a.x - b.x).map((r) => r.str).join(" ").replace(/\s+/g, " ").trim())
+        .filter(Boolean);
+}
+
+function parseCauseListText(fullText) {
+    const lines = fullText.split(/\r?\n/).map((line) => line.replace(/\s+/g, " ").trim()).filter(Boolean);
+
+    let currentDate = "";
+    let currentTribunal = "";
+    let currentOfficer = "";
+    let currentTime = "";
+    let currentMatterType = "";
+
+    const allData = [];
+    const strictCasePattern = /\b([A-Z0-9_/-]+\/[A-Z]?\d+\/\d{4})\b/i;
+    const fallbackCasePattern = /^([A-Z0-9_/-]{4,})\s+/i;
+    const numberedLinePattern = /^\d+\./;
+    const pageMarkerPattern = /^--\s*\d+\s+of\s+\d+\s*--$/i;
+
+    let i = 0;
+    while (i < lines.length) {
+        const line = lines[i];
+        if (pageMarkerPattern.test(line)) {
+            i++;
+            continue;
+        }
+        const tribunalMatch = line.match(/^Tribunal:\s*(.+)$/i);
+        if (tribunalMatch) {
+            currentTribunal = tribunalMatch[1].trim();
+            i++;
+            continue;
+        }
+        if (/^[A-Z]+,\s+\d{1,2}\s+[A-Z]+\s+\d{4}$/.test(line)) {
+            currentDate = line;
+            i++;
+            continue;
+        }
+        if (/^\d{1,2}:\d{2}\s?(AM|PM)$/i.test(line)) {
+            currentTime = line.toUpperCase();
+            i++;
+            continue;
+        }
+        if (/^(HEARING|MENTION)$/i.test(line)) {
+            currentMatterType = line.toUpperCase();
+            i++;
+            continue;
+        }
+        if (/^MILIMANI HIGH COURT$/i.test(line) || /^NAIROBI$/i.test(line)) {
+            if (!currentTribunal) currentTribunal = "MILIMANI HIGH COURT - NAIROBI";
+            i++;
+            continue;
+        }
+        if (line.includes("HON.")) {
+            const m = line.match(/(HON\.\s*.+?)(?:\s+COURT\b|$)/i);
+            if (m) currentOfficer = m[1].replace(/\s+/g, " ").trim();
+            i++;
+            continue;
+        }
+        if (!numberedLinePattern.test(line)) {
+            i++;
+            continue;
+        }
+
+        const matterLines = [line];
+        let j = i + 1;
+        while (
+            j < lines.length &&
+            !numberedLinePattern.test(lines[j]) &&
+            !/^(HEARING|MENTION)$/i.test(lines[j]) &&
+            !/^Tribunal:\s*/i.test(lines[j]) &&
+            !/^[A-Z]+,\s+\d{1,2}\s+[A-Z]+\s+\d{4}$/.test(lines[j]) &&
+            !/^\d{1,2}:\d{2}\s?(AM|PM)$/i.test(lines[j]) &&
+            !pageMarkerPattern.test(lines[j])
+        ) {
+            matterLines.push(lines[j]);
+            j++;
+        }
+
+        const fullMatterLine = matterLines.join(" ").replace(/^\d+\.\s+/, "").trim();
+        const strictCaseMatch = fullMatterLine.match(strictCasePattern);
+        const fallbackMatch = fullMatterLine.match(fallbackCasePattern);
+        const caseNo = strictCaseMatch ? strictCaseMatch[1] : (fallbackMatch ? fallbackMatch[1] : "CASE-NO-UNAVAILABLE");
+        const proceedings = fullMatterLine.replace(caseNo, "").trim() || "-";
+
+        allData.push({
+            date: currentDate,
+            tribunal: currentTribunal || "BPRT",
+            officer: currentOfficer || "HON. -",
+            matterType: currentMatterType || "UNSPECIFIED",
+            caseNo,
+            caseLine: fullMatterLine,
+            proceedings,
+            time: currentTime || "-"
+        });
+        i = j;
+    }
+    return allData;
+}

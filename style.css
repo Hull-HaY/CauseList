@@ -293,3 +293,63 @@ tbody td {
         transform: translateX(-100%);
     }
 }
+
+/* Admin Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-overlay.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: var(--bg-main);
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+}
+
+.modal-header {
+    background: var(--table-header-bg);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--accent);
+}
+
+.modal-header h2 {
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.8rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    color: #ef4444;
+}
+
+.modal-body {
+    padding: 20px;
+}
