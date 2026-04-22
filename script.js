@@ -1,5 +1,21 @@
 import * as pdfjsLib from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getDatabase, ref, onValue, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDAq_LdMur6TizliELlrrT0NFCTC1F7K8g",
+    authDomain: "causelist-98e7b.firebaseapp.com",
+    databaseURL: "https://causelist-98e7b-default-rtdb.firebaseio.com/",
+    projectId: "causelist-98e7b",
+    storageBucket: "causelist-98e7b.firebasestorage.app",
+    messagingSenderId: "610909892107",
+    appId: "1:610909892107:web:119b5ccba217f1c070610e",
+    measurementId: "G-540D56WGM2"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
 const ROWS_PER_PAGE = 5;
 const ROTATION_INTERVAL_MS = 15000;
@@ -126,43 +142,25 @@ function updateTicker(allData) {
 }
 
 function loadPublishedData() {
-    const raw = localStorage.getItem(PUBLISHED_DATA_KEY);
-    if (!raw) {
-        showNoData("Oops! No matters loaded.");
-        updateTicker([]);
-        return;
-    }
+    const dataRef = ref(db, 'publishedData');
+    onValue(dataRef, (snapshot) => {
+        const payload = snapshot.val();
 
-    if (raw === lastPayloadSignature) {
-        return;
-    }
-
-    try {
-        const payload = JSON.parse(raw);
-        const matters = Array.isArray(payload?.matters) ? payload.matters : [];
-        if (matters.length === 0) {
+        if (!payload || !Array.isArray(payload.matters) || payload.matters.length === 0) {
             showNoData("Oops! No matters loaded.");
             updateTicker([]);
-            lastPayloadSignature = raw;
             return;
         }
-        processData(matters);
-        lastPayloadSignature = raw;
-    } catch (error) {
-        console.error("Failed to read published data:", error);
-        showNoData("Oops! No matters loaded.");
-        updateTicker([]);
-    }
+
+        const signature = JSON.stringify(payload);
+        if (signature === lastPayloadSignature) return;
+
+        processData(payload.matters);
+        lastPayloadSignature = signature;
+    });
 }
 
-window.addEventListener("storage", (event) => {
-    if (event.key === PUBLISHED_DATA_KEY) {
-        loadPublishedData();
-    }
-});
-
 loadPublishedData();
-setInterval(loadPublishedData, DATA_REFRESH_INTERVAL_MS);
 
 // === ADMIN MODAL LOGIC ===
 
@@ -203,7 +201,7 @@ async function openAdminPanel() {
         }
         adminAuthenticated = true;
     }
-    
+
     adminModal.classList.remove("hidden");
     startAdminSessionTimer();
 }
@@ -255,10 +253,9 @@ clearDataBtn.addEventListener("click", () => {
     const confirmed = confirm("Clear all published matters from display?");
     if (!confirmed) return;
 
-    localStorage.removeItem(PUBLISHED_DATA_KEY);
+    set(ref(db, 'publishedData'), null);
     lastPayloadSignature = "";
     displayPages = [];
-    currentPageIndex = 0;
     if (rotationTimer) {
         clearInterval(rotationTimer);
         rotationTimer = null;
@@ -308,12 +305,11 @@ uploadInput.addEventListener("change", async (event) => {
 
 function publishMatters(matters) {
     const payload = {
-        publishedAt: new Date().toISOString(),
+        publishedAt: serverTimestamp(),
         matters
     };
-    const raw = JSON.stringify(payload);
-    localStorage.setItem(PUBLISHED_DATA_KEY, raw);
-    lastPayloadSignature = raw;
+    lastPayloadSignature = JSON.stringify(payload);
+    set(ref(db, 'publishedData'), payload);
 }
 
 async function extractPdfText(file) {

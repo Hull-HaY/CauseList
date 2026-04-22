@@ -1,5 +1,22 @@
 import * as pdfjsLib from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getDatabase, ref, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
 pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDAq_LdMur6TizliELlrrT0NFCTC1F7K8g",
+    authDomain: "causelist-98e7b.firebaseapp.com",
+    databaseURL: "https://causelist-98e7b-default-rtdb.firebaseio.com/",
+    projectId: "causelist-98e7b",
+    storageBucket: "causelist-98e7b.firebasestorage.app",
+    messagingSenderId: "610909892107",
+    appId: "1:610909892107:web:119b5ccba217f1c070610e",
+    measurementId: "G-540D56WGM2"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
 const ROWS_PER_PAGE = 5;
 const ROTATION_INTERVAL_MS = 15000;
@@ -71,17 +88,17 @@ async function enforceAdminPasscode() {
 
 function publishMatters(matters) {
     const payload = {
-        publishedAt: new Date().toISOString(),
+        publishedAt: serverTimestamp(),
         matters
     };
-    localStorage.setItem(PUBLISHED_DATA_KEY, JSON.stringify(payload));
+    set(ref(db, 'publishedData'), payload);
 }
 
 function clearPublishedData() {
     const confirmed = confirm("Clear all published matters from display?");
     if (!confirmed) return;
 
-    localStorage.removeItem(PUBLISHED_DATA_KEY);
+    set(ref(db, 'publishedData'), null);
     displayPages = [];
     currentPageIndex = 0;
     if (rotationTimer) {

@@ -353,3 +353,84 @@ tbody td {
 .modal-body {
     padding: 20px;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-header {
+        padding: 10px 15px;
+    }
+    
+    #judiciaryLogo {
+        height: 60px !important;
+    }
+    
+    #tribunalTitle {
+        font-size: 1.3rem;
+    }
+    
+    .date-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .table-container {
+        overflow: auto;
+    }
+    
+    table {
+        min-width: 650px; /* Forces horizontal scrolling on small screens */
+    }
+    
+    .modal-content {
+        width: 95%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .ticker-label {
+        padding: 0 10px;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+    
+    .upload-section {
+        flex-wrap: wrap;
+    }
+    
+    #pdfUpload {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-content-wrapper {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px !important;
+    }
+    
+    #judiciaryLogo {
+        height: 50px !important;
+    }
+    
+    #tribunalTitle {
+        font-size: 1.1rem;
+    }
+    
+    .date-subtitle {
+        font-size: 0.8rem;
+    }
+    
+    .admin-danger-btn {
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.2rem;
+    }
+    
+    .close-btn {
+        font-size: 1.5rem;
+    }
+}
