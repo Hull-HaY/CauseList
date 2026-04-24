@@ -47,7 +47,17 @@
             </div>
         </div>
 
+        <div id="urgentNewsBar" class="urgent-news-bar hidden">
+            <div class="urgent-label">URGENT</div>
+            <div class="urgent-content-wrapper">
+                <span id="urgentText"></span>
+            </div>
+        </div>
+
         <div id="ticker">
+            <div class="rotation-progress-container">
+                <div id="rotationProgressBar" class="rotation-progress-bar"></div>
+            </div>
             <div class="ticker-label">HAPPENING TODAY</div>
             <div class="ticker-content-wrapper">
                 <span id="tickerText">Loading upcoming cases...</span>
@@ -55,23 +65,6 @@
         </div>
     </div>
 
-    <div id="adminModal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Admin Panel <span id="adminTimerDisplay"
-                        style="font-size: 0.9rem; margin-left: 10px; color: #ef4444;"></span></h2>
-                <button id="closeAdminBtn" class="close-btn">&times;</button>
-            </div>
-            <div class="modal-body">
-                <section class="upload-section">
-                    <label for="pdfUpload">Upload PDF(s):</label>
-                    <input id="pdfUpload" type="file" accept="application/pdf" multiple>
-                    <span id="uploadStatus">Waiting for PDF upload(s)...</span>
-                    <button id="clearDataBtn" type="button" class="admin-danger-btn">Clear Published Data</button>
-                </section>
-            </div>
-        </div>
-    </div>
 
     <script src="script.js" type="module"></script>
 </body>
