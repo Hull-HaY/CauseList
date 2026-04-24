@@ -85,7 +85,7 @@ function renderCurrentPage() {
             <td>${m.tribunal || "-"}</td>
             <td class="officer-name">${m.officer || "-"}</td>
             <td class="matter-type">${m.matterType || "-"}</td>
-            <td class="case-no"><div>${m.caseLine || m.caseNo || "-"}</div><div class="proceedings-text">${m.proceedings || "-"}</div></td>
+            <td class="case-no"><div>${m.caseLine || m.caseNo || "-"}</div></td>
             <td><span class="time-badge">${m.time || "-"}</span></td>
         </tr>`;
     });
