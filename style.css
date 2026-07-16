@@ -59,6 +59,69 @@ body {
     font-weight: 600;
 }
 
+/* Live real-time date/time (top-right) */
+.header-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.live-datetime {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    line-height: 1.2;
+}
+
+.live-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.live-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ff2d2d;
+    box-shadow: 0 0 8px rgba(255, 45, 45, 0.9);
+    animation: live-blink 1s infinite ease-in-out;
+}
+
+.live-label {
+    color: #ff5a5a;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.live-date {
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.live-time {
+    color: var(--accent);
+    font-size: 1.4rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 1px;
+}
+
+@keyframes live-blink {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.25;
+        transform: scale(0.85);
+    }
+}
+
 .upload-section {
     padding: 8px 18px;
     border-bottom: 1px solid var(--border-color);
@@ -495,6 +558,14 @@ tbody td {
 
     #tribunalTitle {
         font-size: 1.3rem;
+    }
+
+    .live-time {
+        font-size: 1.15rem;
+    }
+
+    .live-date {
+        font-size: 0.85rem;
     }
 
     .table-container {

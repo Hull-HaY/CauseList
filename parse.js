@@ -19,7 +19,7 @@ function processPdfLines(lines) {
     let officer = '';
     let tribunal = '';
     let time = '';
-    let category = '';
+    let matterType = 'MENTION';
 
     const matters = [];
     let currentMatter = null;
@@ -28,8 +28,19 @@ function processPdfLines(lines) {
         const textPart = line.substring(line.indexOf(':') + 1).trim();
         if (!textPart) continue;
 
-        if (textPart.includes('MILIMANI HIGH COURT') || textPart === 'NAIROBI' || textPart === 'CAUSE LIST') continue;
+        if (textPart.toUpperCase().includes("MILIMANI HIGH COURT")) {
+            const match = textPart.match(/MILIMANI HIGH COURT\s*[-–]?\s*(.+)/i);
+            if (match && match[1].trim() && !match[1].toUpperCase().includes("ROOM")) {
+                tribunal = match[1].trim();
+            }
+            continue;
+        }
+        if (textPart === 'NAIROBI' || textPart === 'CAUSE LIST') continue;
         if (textPart.startsWith('http')) continue;
+        if (textPart.toUpperCase().includes("TRIBUNAL") && !textPart.toUpperCase().includes("ROOM") && !currentMatter) {
+            tribunal = textPart;
+            continue;
+        }
 
         if (textPart.match(/^[A-Z]+,\s*\d{1,2}\s+[A-Z]+\s+\d{4}$/)) {
             date = textPart;
@@ -37,14 +48,7 @@ function processPdfLines(lines) {
         }
 
         if (textPart.includes('HON.') || textPart.includes('MR.')) {
-            // Split into officer and tribunal
-            const courtIndex = textPart.indexOf('COURT');
-            if (courtIndex !== -1) {
-                officer = textPart.substring(0, courtIndex).trim();
-                tribunal = textPart.substring(courtIndex).trim();
-            } else {
-                officer = textPart;
-            }
+            officer = textPart;
             continue;
         }
 
@@ -53,8 +57,8 @@ function processPdfLines(lines) {
             continue;
         }
 
-        if (textPart === 'MENTION' || textPart === 'HEARING') {
-            category = textPart;
+        if (textPart.match(/^(MENTION|HEARING|RULING)$/i)) {
+            matterType = textPart.toUpperCase();
             continue;
         }
 
@@ -83,7 +87,7 @@ function processPdfLines(lines) {
                 officer,
                 tribunal,
                 time,
-                category,
+                matterType: matterType,
                 id: matterMatch[1],
                 caseNo,
                 parties

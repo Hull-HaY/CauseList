@@ -188,4 +188,30 @@ function loadPublishedData() {
     });
 }
 
+function startLiveClock() {
+    const dateEl = document.getElementById("liveDate");
+    const timeEl = document.getElementById("liveTime");
+    if (!dateEl || !timeEl) return;
+
+    const update = () => {
+        const now = new Date();
+        dateEl.innerText = now.toLocaleDateString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        });
+        timeEl.innerText = now.toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: true,
+        });
+    };
+
+    update();
+    setInterval(update, 1000);
+}
+
+startLiveClock();
 loadPublishedData();

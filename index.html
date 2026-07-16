@@ -5,24 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Tribunal Cause List Display</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"></noscript>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/jpeg" href="./img/judiciary logo.jpeg">
     <link rel="shortcut icon" type="image/jpeg" href="../A-01/images/judiciary logo.jpeg">
+    <link rel="preload" as="image" href="./img/judiciary logo.jpeg">
 </head>
 
 <body>
     <div id="app">
         <header class="main-header">
             <div class="header-content-wrapper" style="display: flex; align-items: center; gap: 20px;">
-                <img src="./img/judiciary logo.jpeg" alt="Judiciary Logo" id="judiciaryLogo"
+                <img src="./img/judiciary logo.jpeg" alt="Judiciary Logo" id="judiciaryLogo" fetchpriority="high"
                     style="height: 80px; object-fit: contain; border-radius: 50%; box-shadow: 0 0 10px rgba(207, 169, 45, 0.5);">
                 <div class="header-left">
                     <h1 id="tribunalTitle">Judiciary Cause List</h1>
                     <p id="currentDateDisplay" class="date-subtitle"></p>
                 </div>
             </div>
-            <div class="header-right"></div>
+            <div class="header-right">
+                <div class="live-datetime">
+                    <div class="live-indicator">
+                        <span class="live-dot"></span>
+                        <span class="live-label">LIVE</span>
+                    </div>
+                    <div id="liveDate" class="live-date"></div>
+                    <div id="liveTime" class="live-time"></div>
+                </div>
+            </div>
         </header>
 
         <div class="table-container">
